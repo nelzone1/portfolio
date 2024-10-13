@@ -6,7 +6,7 @@ pipeline {
             steps {
                 echo 'Perfomr SCM Check-Out'
 				echo 'Cloning Java Maven App Code'
-				git 'https://github.com/nelzone1/portfolio.git'
+				git 'git@github.com:nelzone1/portfolio.git'
             }
         }
         stage('Java Application Build') {
