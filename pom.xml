@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
+    <!-- Project coordinates -->
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Project coordinates -->
     <groupId>com.dev3l.portfolio</groupId>
     <artifactId>portfolio</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -15,7 +15,7 @@
 
     <!-- Dependencies -->
     <dependencies>
-        <!-- Servlet API for Java EE support -->
+        <!-- Servlet API for Java EE support (optional, required for web apps) -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -76,7 +76,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Maven Surefire Plugin for JUnit 5 -->
+            <!-- Maven Surefire Plugin for running JUnit 5 tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -87,10 +87,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <!-- Reporting and repositories (if necessary) -->
-    <repositories>
-        <!-- Add repositories if required for dependencies -->
-    </repositories>
 
 </project>
