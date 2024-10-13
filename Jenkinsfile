@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo 'Perform Java Maven Application Build'
                 // Running the Maven build
-                sh 'mvn clean package'
+                sh 'mvn clean package -X'
             }
         }
 
