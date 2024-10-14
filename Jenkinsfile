@@ -16,19 +16,21 @@ pipeline {
 
         stage('Java Application Build') {
             steps {
-                echo 'Perform Java Maven Application Build'
+                echo 'Performing Java Maven Application Build'
                 // Running the Maven build
                 sh 'mvn clean package -X'
             }
         }
 
-        // Uncomment the deployment stage when ready
-        // stage('Deploy to Tomcat_Server') {
-        //     steps {
-        //         script {
-        //             sshPublisher(publishers: [sshPublisherDesc(configName: 'SA-Tomcat_Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/mvn-hello-world.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-        //         }
-        //     }
-        // }
+        stage('Deploy to Tomcat Server') {
+            steps {
+                echo 'Deploying artifact to Tomcat'
+                script {
+                    sshagent(['tomcat-deployer']) {
+                        sh 'scp -o StrictHostKeyChecking=no target/portfolio.war technel@10.0.0.235:/opt/tomcat/webapps'
+                    }
+                }
+            }
+        }
     }
 }
