@@ -10,7 +10,7 @@ pipeline {
             steps {
                 echo 'Performing SCM Checkout'
                 echo 'Cloning Java Maven App Code'
-                git branch: 'main', credentialsId: 'GH-PAT', url: 'git@github.com:nelzone1/portfolio.git'
+                git branch: 'main', credentialsId: 'gh-token', url: 'https://github.com/nelzone1/portfolio.git'
             }
         }
 
