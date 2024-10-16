@@ -27,7 +27,7 @@ pipeline {
                 echo 'Deploying artifact to Tomcat'
                 script {
                     sshagent(['tomcat-deployer']) {
-                        sh 'scp -o StrictHostKeyChecking=no portfolio.war technel@10.0.0.235:/opt/tomcat/webapps'
+                        sh 'scp -o StrictHostKeyChecking=no -v portfolio.war technel@10.0.0.235:/opt/tomcat/webapps'
                     }
                 }
             }
