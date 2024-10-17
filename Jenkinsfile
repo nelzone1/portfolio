@@ -26,14 +26,13 @@ pipeline {
             steps {
                 echo 'Deploying artifact to Tomcat'
                 script {
-                    deploy adapters: [tomcat9(credentialsId: 'deployer', path: '', url: 'http://10.0.0.235:8080')], contextPath: '/opt/tomcat/webapps', war: '**/*.war'
-                    //
-                    #sshagent(['tomcat-deployer']) {
-                        #sh 'scp -o StrictHostKeyChecking=no -v portfolio.war technel@10.0.0.235:/opt/tomcat/webapps'
-                    }
+                    deploy adapters: [tomcat9(credentialsId: 'deployer', path: '', url: 'http://10.0.0.235:8080')], contextPath: '', war: '**/*.war'
+                    // Uncomment if you want to use SSH for deployment
+                    // sshagent(['tomcat-deployer']) {
+                    //     sh 'scp -o StrictHostKeyChecking=no -v target/portfolio.war technel@10.0.0.235:/opt/tomcat/webapps'
+                    // }
                 }
             }
         }
     }
 }
-
