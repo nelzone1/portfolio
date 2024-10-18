@@ -1,5 +1,5 @@
-# mvn-hello-world-web-app
-Java Hello World web application created using maven-archetype-webapp
+# portfolio-web-app
+Java Portfolio web application created using maven-archetype-webapp
 
 #Test
 
