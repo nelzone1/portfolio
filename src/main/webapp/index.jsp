@@ -134,7 +134,7 @@
 
 <section>
     <footer>
-        <p>&copy; 2024 Nelson Oboh</p>
+        <p>&copy; 2024 Technel</p>
     </footer>
 
 </body>
