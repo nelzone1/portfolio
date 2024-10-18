@@ -10,7 +10,7 @@ pipeline {
             steps {
                 echo 'Performing SCM Checkout'
                 echo 'Cloning Java Maven App Code'
-                git branch: 'main', credentialsId: 'gh-token', url: 'https://github.com/nelzone1/portfolio.git'
+                git branch: 'main', credentialsId: 'gh-token', url: 'git@github.com:nelzone1/portfolio.git'
             }
         }
 
@@ -40,7 +40,7 @@ pipeline {
         stage("SonarQube Analysis") {
             steps {
                 echo 'Running SonarQube Analysis'
-                withSonarQubeEnv(credentialsId: 'immutable-sonarQ') {
+                withSonarQubeEnv(installationName: 'YourSonarQubeInstallation', credentialsId: 'immutable-sonarQ') {
                     sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName=portfolio'
                 }
             }
