@@ -17,7 +17,6 @@ pipeline {
         stage('Java Application Build') {
             steps {
                 echo 'Performing Java Maven Application Build'
-                // Running the Maven build
                 sh 'mvn clean package -X'
             }
         }
@@ -26,16 +25,25 @@ pipeline {
             steps {
                 echo 'Deploying artifact to Tomcat'
                 script {
-                    deploy adapters: [tomcat9(credentialsId: 'deployer', path: '', url: 'http://10.0.0.235:8080')],
-                           contextPath: '/portfolio', // Adjust the context path as needed
-                           war: 'target/portfolio.war' // Ensure this matches the output path of your WAR
+                    try {
+                        deploy adapters: [tomcat9(credentialsId: 'deployer', path: '', url: 'http://10.0.0.235:8080')],
+                               contextPath: '/portfolio',
+                               war: 'target/portfolio.war'
+                    } catch (Exception e) {
+                        echo "Deployment failed: ${e.getMessage()}"
+                        currentBuild.result = 'FAILURE'
+                    }
                 }
             }
         }
-        stage("SonarQube-SCM") {
-        withSonarQubeEnv(credentialsId: 'immutable-sonarQ') {
-            sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName='portfolio'"
+
+        stage("SonarQube Analysis") {
+            steps {
+                echo 'Running SonarQube Analysis'
+                withSonarQubeEnv(credentialsId: 'immutable-sonarQ') {
+                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName=portfolio'
+                }
+            }
         }
     }
 }
-
