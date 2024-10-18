@@ -32,7 +32,7 @@ pipeline {
                 }
             }
         }
-        stage("SonarQube-SCM")
+        stage("SonarQube-SCM") {
         withSonarQubeEnv(credentialsId: 'immutable-sonarQ') {
             sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName='portfolio'"
         }
