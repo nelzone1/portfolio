@@ -26,9 +26,9 @@ pipeline {
             steps {
                 echo 'Deploying artifact to Tomcat'
                 script {
-                    sshagent(['tomcat-deployer']) {
-                        sh 'scp -o StrictHostKeyChecking=no -v portfolio.war technel@10.0.0.235:/opt/tomcat/webapps'
-                    }
+                    deploy adapters: [tomcat9(credentialsId: 'deployer', path: '', url: 'http://10.0.0.235:8080')],
+                           contextPath: '/portfolio', // Adjust the context path as needed
+                           war: 'target/portfolio.war' // Ensure this matches the output path of your WAR
                 }
             }
         }
@@ -38,4 +38,3 @@ pipeline {
         }
     }
 }
-

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NELSON OBOH - DevOps Engineer</title>
+    <title>NELSON OBOH Portfolio</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -134,7 +134,7 @@
 
 <section>
     <footer>
-        <p>&copy; 2024 Nelson Oboh</p>
+        <p>&copy; 2024 Technel</p>
     </footer>
 
 </body>
