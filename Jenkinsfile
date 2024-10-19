@@ -21,14 +21,21 @@ pipeline {
             }
         }
 
-        stage("SonarQube Analysis") {
-            steps {
-                echo 'Running SonarQube Analysis'
-                withSonarQubeEnv(installationName: 'SonarQube-Immutable-Server', credentialsId: 'immutable-sonarQ') {
-                sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName=portfolio'
-                }
+        stage('SonarQube Analysis') {
+         def mvn = tool 'Default Maven';
+         withSonarQubeEnv() {
+            sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName='portfolio'"
             }
         }
+
+        // stage("SonarQube Analysis") {
+        //     steps {
+        //         echo 'Running SonarQube Analysis'
+        //         withSonarQubeEnv(installationName: 'SonarQube-Immutable-Server', credentialsId: 'immutable-sonarQ') {
+        //         sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName=portfolio'
+        //         }
+        //     }
+        // }
 
         stage('Deploy to Tomcat Server') {
             steps {
