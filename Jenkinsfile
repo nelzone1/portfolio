@@ -24,8 +24,8 @@ pipeline {
         stage("SonarQube Analysis") {
             steps {
                 echo 'Running SonarQube Analysis'
-                withSonarQubeEnv(credentialsId: 'immutable-sonarQ') {
-                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName=portfolio'
+                withSonarQubeEnv(installationName: 'SonarQube-Immutable-Server', credentialsId: 'immutable-sonarQ') {
+                sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName=portfolio'
                 }
             }
         }
