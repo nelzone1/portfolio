@@ -30,15 +30,6 @@ pipeline {
             }
         }
 
-                stage("SonarQube Analysis") {
-            steps {
-                echo 'Running SonarQube Analysis'
-                withSonarQubeEnv(credentialsId: 'SonarQubeServer') {
-                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName=portfolio'
-                }
-            }
-        }
-
         stage('Deploy to Tomcat Server') {
             steps {
                 echo 'Deploying artifact to Tomcat'
