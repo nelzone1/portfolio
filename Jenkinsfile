@@ -21,6 +21,24 @@ pipeline {
             }
         }
 
+        stage("SonarQube Analysis") {
+            steps {
+                echo 'Running SonarQube Analysis'
+                withSonarQubeEnv(credentialsId: 'SonarQubeServer') {
+                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName=portfolio'
+                }
+            }
+        }
+
+                stage("SonarQube Analysis") {
+            steps {
+                echo 'Running SonarQube Analysis'
+                withSonarQubeEnv(credentialsId: 'SonarQubeServer') {
+                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName=portfolio'
+                }
+            }
+        }
+
         stage('Deploy to Tomcat Server') {
             steps {
                 echo 'Deploying artifact to Tomcat'
@@ -33,16 +51,6 @@ pipeline {
                         echo "Deployment failed: ${e.getMessage()}"
                         currentBuild.result = 'FAILURE'
                     }
-                }
-            }
-        }
-
-        stage("SonarQube Analysis") {
-            steps {
-                echo 'Running SonarQube Analysis'
-                withSonarQubeEnv(credentialsId: 'immutable-sonarQ', installationName: 'SonarQube-Immutable-Server') {
-                //  withSonarQubeEnv(credentialsId: 'immutable-sonarQ') {
-                sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName=portfolio'
                 }
             }
         }
