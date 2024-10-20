@@ -20,23 +20,24 @@ pipeline {
                 sh 'mvn clean package -X'
             }
         }
+        
 
-        stage('SonarQube Analysis') {
-            def mvn = tool 'Default Maven';
-            withSonarQubeEnv() {
-                sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName='portfolio'"
+        stage("SonarQube Analysis") {
+            steps {
+                echo 'Running SonarQube Analysis'
+                withSonarQubeEnv(installationName: 'SonarQube-Immutable-Server', credentialsId: 'immutable-sonarQ') {
+                sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName=portfolio'
+                }
             }
         }
 
-        // stage("SonarQube Analysis") {
-        //     steps {
-        //         echo 'Running SonarQube Analysis'
-        //         withSonarQubeEnv(installationName: 'SonarQube-Immutable-Server', credentialsId: 'immutable-sonarQ') {
-        //         sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=portfolio -Dsonar.projectName=portfolio'
-        //         }
-        //     }
-        // }
-
+        stage("OWASP Dependency Check") {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ --format HTML', odcInstallation: 'DP'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+        
         stage('Deploy to Tomcat Server') {
             steps {
                 echo 'Deploying artifact to Tomcat'
