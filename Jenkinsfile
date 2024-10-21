@@ -40,7 +40,7 @@ pipeline {
 stage("Docker Build & Push") {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'DockerHub-Cred') {
+                    withDockerRegistry(credentialsId: 'dockerloginid') {
                         sh "docker build -t image1 ."
                         sh "docker tag image1 nelzone1/portfolio:latest"
                         sh "docker push nelzone1/portfolio:latest"
