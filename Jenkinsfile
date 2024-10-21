@@ -42,8 +42,8 @@ stage("Docker Build & Push") {
                 script {
                     withDockerRegistry(credentialsId: 'dockerloginid') {
                         sh "docker build -t image1 ."
-                        sh "docker tag image1 nelzone1/portfolio:latest"
-                        sh "docker push nelzone1/portfolio:latest"
+                        sh "docker tag image1 nelzone/portfolio:latest"
+                        sh "docker push nelzone/portfolio:latest"
                     }
                 }
             }
