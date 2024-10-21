@@ -20,7 +20,6 @@ pipeline {
                 sh 'mvn clean package -X'
             }
         }
-        
 
         stage("SonarQube Analysis") {
             steps {
@@ -38,6 +37,18 @@ pipeline {
             }
         }
         
+stage("Docker Build & Push") {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'DockerHub-Cred') {
+                        sh "docker build -t image1 ."
+                        sh "docker tag image1 nelzone1/portfolio:latest"
+                        sh "docker push nelzone1/portfolio:latest"
+                    }
+                }
+            }
+        }
+
         stage('Deploy to Tomcat Server') {
             steps {
                 echo 'Deploying artifact to Tomcat'
