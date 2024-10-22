@@ -43,7 +43,9 @@ stage("Docker Build & Push") {
                     withDockerRegistry(credentialsId: 'dockerloginid') {
                         sh "docker build -t image1 ."
                         sh "docker tag image1 nelzone/portfolio:latest"
+                        sh "docker login -u nelzone -p ${dockerloginid}"
                         sh "docker push nelzone/portfolio:latest"
+                        sh 'docker image rm $JOB_NAME:v1.$BUILD_ID nelzone/$JOB_NAME:v1.$BUILD_ID nelzone/$JOB_NAME:latest'
                     }
                 }
             }
