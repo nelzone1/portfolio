@@ -36,43 +36,111 @@ pipeline {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
-        
-        stage('Build Docker Image') {
-            steps {
-                sh "docker build -t nelzone/portfolio:V${BUILD_NUMBER} ."
-                sh "docker tag nelzone/portfolio:V${BUILD_NUMBER} nelzone/portfolio:latest"
-            }
-        }
 
-        stage('Approve - push image to dockerhub') {
-            steps {
-                // Send an approval prompt
-                script {
-                    env.APPROVE_DEPLOYMENT = input message: 'User input required. Choose "Yes" | "Abort"'
-                }
-            }
-        }
+        stage('Build Docker Image') { 
 
-        stage('Publish_to_Docker_Registry') {
-            steps {
-                sh "docker push nelzone/portfolio:latest"
-            }
-        }
+            steps { 
 
-        stage('Deploy to Tomcat Server') {
-            steps {
-                echo 'Deploying artifact to Tomcat'
-                script {
-                    try {
-                        deploy adapters: [tomcat9(credentialsId: 'deployer', path: '', url: 'http://10.0.0.235:8080')],
-                               contextPath: '/portfolio',
-                               war: 'target/portfolio.war'
-                    } catch (Exception e) {
-                        echo "Deployment failed: ${e.getMessage()}"
-                        currentBuild.result = 'FAILURE'
-                    }
-                }
-            }
-        }
-    }
-}
+                sh "docker build -t nelzone/portfolio:V${BUILD_NUMBER} ." 
+
+                sh "docker tag nelzone/portfolio:V${BUILD_NUMBER} nelzone/portfolio:latest" 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Approve - Push Image to DockerHub') { 
+
+            steps { 
+
+                script { 
+
+                    // User approval with options 
+
+                    env.APPROVE_DEPLOYMENT = input( 
+
+                        message: 'User input required. Proceed with DockerHub Push?', 
+
+                        ok: 'Yes', 
+
+                        parameters: [ 
+
+                            choice(name: 'Deployment', choices: ['Yes', 'Abort'], description: 'Choose Yes to push the image to DockerHub') 
+
+                        ] 
+
+                    ) 
+
+                } 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Publish to DockerHub') { 
+
+            when { 
+
+                expression { env.APPROVE_DEPLOYMENT == 'Yes' } 
+
+            } 
+
+            steps { 
+
+                script { 
+
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) { 
+
+                        sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}" 
+
+                        sh "docker push nelzone/portfolio:V${BUILD_NUMBER}" 
+
+                        sh "docker push nelzone/portfolio:latest" 
+
+                    } 
+
+                } 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Deploy to Tomcat Server') { 
+
+            steps { 
+
+                echo 'Deploying artifact to Tomcat...' 
+
+                script { 
+
+                    try { 
+
+                        deploy adapters: [tomcat9(credentialsId: 'deployer', path: '', url: 'http://10.0.0.235:8080')], 
+
+                               contextPath: '/portfolio', 
+
+                               war: 'target/portfolio.war' 
+
+                    } catch (Exception e) { 
+
+                        echo "Deployment failed: ${e.getMessage()}" 
+
+                        currentBuild.result = 'FAILURE' 
+
+                    } 
+
+                } 
+
+            } 
+
+        } 
+
+    } 
+
+} 
