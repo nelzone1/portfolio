@@ -37,17 +37,25 @@ pipeline {
             }
         }
         
-stage("Docker Build & Push") {
+        stage('Build Docker Image') {
             steps {
+                sh "docker build -t nelzone/portfolio:V${BUILD_NUMBER} ."
+                sh "docker tag nelzone/portfolio:V${BUILD_NUMBER} nelzone/portfolio:latest"
+            }
+        }
+
+        stage('Approve - push image to dockerhub') {
+            steps {
+                // Send an approval prompt
                 script {
-                    withDockerRegistry(credentialsId: 'dockerloginid') {
-                        sh "docker build -t image1 ."
-                        sh "docker tag image1 nelzone/portfolio:latest"
-                        //sh "docker login -u nelzone -p ${dockerloginid}"
-                        sh "docker push nelzone/portfolio:latest"
-                        sh 'docker image rm $JOB_NAME:v1.$BUILD_ID nelzone/$JOB_NAME:v1.$BUILD_ID nelzone/$JOB_NAME:latest'
-                    }
+                    env.APPROVE_DEPLOYMENT = input message: 'User input required. Choose "Yes" | "Abort"'
                 }
+            }
+        }
+
+        stage('Publish_to_Docker_Registry') {
+            steps {
+                sh "docker push nelzone/portfolio:latest"
             }
         }
 
