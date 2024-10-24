@@ -29,13 +29,25 @@ pipeline {
             }
         }
 
+        // stage("OWASP Dependency Check") {
+        //     steps {
+        //         echo 'Running OWASP Dependency Check'
+        //         dependencyCheck additionalArguments: '--scan ./ --format HTML', odcInstallation: 'DP'
+        //         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+        //     }
+        // }
+
         stage("OWASP Dependency Check") {
             steps {
                 echo 'Running OWASP Dependency Check'
                 dependencyCheck additionalArguments: '--scan ./ --format HTML', odcInstallation: 'DP'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+                script {
+                    sh 'ls -la ./dependency-check-report'
+                }
+            dependencyCheckPublisher pattern: '**/dependency-check-report/*.xml'
             }
         }
+
 
         stage('Docker Login') {
             steps {
