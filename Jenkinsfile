@@ -37,17 +37,18 @@ pipeline {
         //     }
         // }
 
+
         stage("OWASP Dependency Check") {
             steps {
                 echo 'Running OWASP Dependency Check'
-                dependencyCheck additionalArguments: '--scan ./ --format HTML', odcInstallation: 'DP'
+                dependencyCheck additionalArguments: '--scan ./ --format ALL --out ./dependency-check-report', odcInstallation: 'DP'
                 script {
+                    echo 'Listing report files:'
                     sh 'ls -la ./dependency-check-report'
                 }
-            dependencyCheckPublisher pattern: '**/dependency-check-report/*.xml'
+            dependencyCheckPublisher pattern: './dependency-check-report/**/*.xml'
             }
         }
-
 
         stage('Docker Login') {
             steps {
