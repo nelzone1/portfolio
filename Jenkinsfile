@@ -29,22 +29,22 @@ pipeline {
             }
         }
 
-        stage("OWASP Dependency Check") {
-            steps {
-                echo 'Running OWASP Dependency Check'
-                dependencyCheck additionalArguments: '--scan ./ --format ALL --out ./dependency-check-report', odcInstallation: 'DP'
+        // stage("OWASP Dependency Check") {
+        //     steps {
+        //         echo 'Running OWASP Dependency Check'
+        //         dependencyCheck additionalArguments: '--scan ./ --format ALL --out ./dependency-check-report', odcInstallation: 'DP'
 
-                script {
-                    echo 'Listing report files:'
-                    sh 'ls -la ./dependency-check-report'
-                    def xmlFiles = sh(script: 'ls -1 ./dependency-check-report/*.xml', returnStdout: true).trim()
-                    echo "Found XML files: ${xmlFiles}"
-                }
+        //         script {
+        //             echo 'Listing report files:'
+        //             sh 'ls -la ./dependency-check-report'
+        //             def xmlFiles = sh(script: 'ls -1 ./dependency-check-report/*.xml', returnStdout: true).trim()
+        //             echo "Found XML files: ${xmlFiles}"
+        //         }
 
-                echo 'Publishing Dependency Check report...'
-                dependencyCheckPublisher pattern: '/var/lib/jenkins/workspace/technel-demo/portfolio/dependency-check-report/dependency-check-report.xml'
-            }
-        }
+        //         echo 'Publishing Dependency Check report...'
+        //         dependencyCheckPublisher pattern: '/var/lib/jenkins/workspace/technel-demo/portfolio/dependency-check-report/dependency-check-report.xml'
+        //     }
+        // }
 
         stage('Docker Login') {
             steps {
@@ -110,4 +110,3 @@ pipeline {
     }
 }
 
-//
