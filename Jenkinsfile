@@ -46,7 +46,8 @@ pipeline {
                     echo 'Listing report files:'
                     sh 'ls -la ./dependency-check-report'
                 }
-            dependencyCheckPublisher pattern: './dependency-check-report/**/*.xml'
+                echo 'Publishing Dependency Check report...'
+                dependencyCheckPublisher pattern: './dependency-check-report/**/*.xml'
             }
         }
 
