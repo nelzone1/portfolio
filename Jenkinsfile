@@ -42,7 +42,7 @@ pipeline {
                 }
 
                 echo 'Publishing Dependency Check report...'
-                dependencyCheckPublisher pattern: '/var/lib/jenkins/workspace/technel-demo/portfolio/dependency-check-report/**/*.xml'
+                dependencyCheckPublisher pattern: '/var/lib/jenkins/workspace/technel-demo/portfolio/dependency-check-report/dependency-check-report.xml'
             }
         }
 
@@ -109,3 +109,5 @@ pipeline {
         }
     }
 }
+
+//
