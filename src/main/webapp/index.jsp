@@ -10,7 +10,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #eef2f3;
             color: #333;
             line-height: 1.6;
         }
@@ -19,70 +19,63 @@
             background: url('techy.jpg') center/cover no-repeat;
             color: #fff;
             text-align: center;
-            padding: 3em 0;
+            padding: 5em 0;
             position: relative;
         }
 
-        header img {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border: 5px solid #fff;
-            margin-bottom: 15px;
-        }
-
-        h1 {
+        header h1 {
+            font-size: 3em;
             margin: 0;
-            font-size: 2.5em;
         }
 
-        h2, h3, h4 {
-            color: #4285f4;
+        header p {
+            font-size: 1.5em;
+            margin: 0.5em 0 2em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2em;
         }
 
         section {
-            max-width: 800px;
-            margin: 2em auto;
-            padding: 1.5em;
+            margin-bottom: 3em;
             background-color: #fff;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 2em;
         }
 
         h2 {
+            color: #4285f4;
             border-bottom: 2px solid #4285f4;
             padding-bottom: 0.5em;
             margin-bottom: 1em;
         }
 
-        p {
-            color: #555;
-            margin-bottom: 1em;
+        .experience, .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5em;
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
+        .card {
+            flex: 1 1 calc(30% - 1em);
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.5em;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
         }
 
-        ul li {
-            position: relative;
-            padding-left: 1.5em;
-            margin-bottom: 0.5em;
+        .card:hover {
+            transform: scale(1.05);
         }
 
-        ul li::before {
-            content: '\2022';
-            color: #4285f4;
-            position: absolute;
-            left: 0;
-            font-size: 1.2em;
-        }
-
-        footer {
+        .footer {
             text-align: center;
-            padding: 1em 0;
+            padding: 2em 0;
             background-color: #4285f4;
             color: #fff;
             position: relative;
@@ -91,18 +84,27 @@
         }
 
         /* Responsive styles */
+        @media (max-width: 800px) {
+            .card {
+                flex: 1 1 calc(45% - 1em);
+            }
+        }
+
         @media (max-width: 600px) {
             header {
-                padding: 2em 0;
+                padding: 3em 0;
             }
 
-            header img {
-                width: 120px;
-                height: 120px;
+            header h1 {
+                font-size: 2.5em;
             }
 
-            h1 {
-                font-size: 2em;
+            header p {
+                font-size: 1.2em;
+            }
+
+            .card {
+                flex: 1 1 100%;
             }
         }
     </style>
@@ -111,56 +113,74 @@
 <body>
 
     <header>
-        <img src="Nelzone.jpg" alt="Nelson Oboh">
         <h1>Nelson Oboh</h1>
         <p>DevOps Engineer</p>
     </header>
 
-    <section>
-        <h2>Get to Know Me</h2>
-        <p>I'm a seasoned DevOps Engineer with a proven track record of five years in architecting, implementing, and optimizing robust CI/CD and infrastructure automation solutions that meet business needs. I am eager to contribute my skills to a dynamic team and help achieve their goals.</p>
-    </section>
+    <div class="container">
+        <section>
+            <h2>About Me</h2>
+            <p>I'm a seasoned DevOps Engineer with five years of experience in architecting, implementing, and optimizing robust CI/CD and infrastructure automation solutions. I am passionate about contributing my skills to a dynamic team to achieve business goals.</p>
+        </section>
 
-    <section>
-        <h2>Professional Experience</h2>
+        <section>
+            <h2>Professional Experience</h2>
+            <div class="experience">
+                <div class="card">
+                    <h3>Dell Technologies</h3>
+                    <p><strong>Role:</strong> DevOps Engineer</p>
+                    <p><strong>Duration:</strong> Sep 2020 - Current</p>
+                    <ul>
+                        <li>Supported multiple AWS cloud instances running Ubuntu and RHEL Linux.</li>
+                        <li>Decomposed a monolithic app into microservices.</li>
+                        <li>Designed monitoring solutions using Datadog.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Becton Dickinson</h3>
+                    <p><strong>Role:</strong> DevOps Engineer/Linux Administrator</p>
+                    <p><strong>Duration:</strong> May 2018 - Sep 2020</p>
+                    <ul>
+                        <li>Built CI/CD pipelines using Azure DevOps and AWS Code Pipeline.</li>
+                        <li>Implemented serverless architectures with AWS Lambda.</li>
+                        <li>Automated provisioning and management with Ansible.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-        <h3>Dell Technologies</h3>
-        <p><strong>Role:</strong> DevOps Engineer | <strong>Duration:</strong> Sep 2020 - Current</p>
-        <h4>Roles and Responsibilities:</h4>
-        <ul>
-            <li>Supported multiple AWS cloud instances running Ubuntu and RHEL Linux.</li>
-            <li>Decomposed a monolithic app into microservices, hosting the React-based client on S3 with CloudFront and the server on AWS ECS.</li>
-            <li>Designed and maintained monitoring solutions with Datadog for a complex microservices architecture.</li>
-        </ul>
+        <section>
+            <h2>Education</h2>
+            <p>B.Sc. in Computer Science, Ambrose Alli University, Edo State, Nigeria (Sep 2011)</p>
+            <p>Computer Networking and Troubleshooting, St. Angelos Institute for Technology and Management, Mumbai, India</p>
+        </section>
 
-        <h3>Becton Dickinson</h3>
-        <p><strong>Role:</strong> DevOps Engineer/Linux Administrator | <strong>Duration:</strong> May 2018 - Sep 2020</p>
-        <h4>Roles and Responsibilities:</h4>
-        <ul>
-            <li>Built and maintained CI/CD pipelines using Azure DevOps and AWS Code Pipeline.</li>
-            <li>Implemented serverless architectures with AWS Lambda, achieving a 30% reduction in operational costs.</li>
-            <li>Automated provisioning and management with Ansible playbooks.</li>
-        </ul>
-    </section>
+        <section>
+            <h2>Certifications</h2>
+            <p>AWS Certified Solutions Architect Associate</p>
+            <p>CompTIA Linux+</p>
+        </section>
 
-    <section>
-        <h2>Education</h2>
-        <p>Bachelor of Science in Computer Science, Ambrose Alli University, Edo State, Nigeria (Sep 2011)</p>
-        <p>Computer Networking and Troubleshooting, St. Angelos Institute for Technology and Management, Kalyan, Mumbai, India</p>
-    </section>
+        <section>
+            <h2>Skills</h2>
+            <div class="skills">
+                <div class="card">
+                    <h3>DevOps Tools</h3>
+                    <p>Jenkins, GitLab, CI/CD, Terraform</p>
+                </div>
+                <div class="card">
+                    <h3>Containerization</h3>
+                    <p>Docker, Kubernetes</p>
+                </div>
+                <div class="card">
+                    <h3>Languages</h3>
+                    <p>Bash, Python, Java</p>
+                </div>
+            </div>
+        </section>
+    </div>
 
-    <section>
-        <h2>Certifications</h2>
-        <p>AWS Certified Solutions Architect Associate</p>
-        <p>CompTIA Linux+</p>
-    </section>
-
-    <section>
-        <h2>Skills</h2>
-        <p>DevOps Tools: Jenkins, GitLab, CI/CD, Terraform, Ansible, Docker, Kubernetes</p>
-    </section>
-
-    <footer>
+    <footer class="footer">
         <p>&copy; 2024 Technel</p>
     </footer>
 
