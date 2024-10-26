@@ -62,19 +62,19 @@ pipeline {
             }
         }
 
-        stage('Approve - Push Image to DockerHub') {
-            steps {
-                script {
-                    env.APPROVE_DEPLOYMENT = input(
-                        message: 'User input required. Proceed with DockerHub Push?',
-                        ok: 'Yes',
-                        parameters: [
-                            choice(name: 'Deployment', choices: ['Yes', 'Abort'], description: 'Choose Yes to push the image to DockerHub')
-                        ]
-                    )
-                }
-            }
-        }
+        // stage('Approve - Push Image to DockerHub') {
+        //     steps {
+        //         script {
+        //             env.APPROVE_DEPLOYMENT = input(
+        //                 message: 'User input required. Proceed with DockerHub Push?',
+        //                 ok: 'Yes',
+        //                 parameters: [
+        //                     choice(name: 'Deployment', choices: ['Yes', 'Abort'], description: 'Choose Yes to push the image to DockerHub')
+        //                 ]
+        //             )
+        //         }
+        //     }
+        // }
 
         stage('Publish to DockerHub') {
             when {
