@@ -10,15 +10,17 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
+            background-color: #f4f4f4;
             color: #333;
+            line-height: 1.6;
         }
 
         header {
-            background: url('techy.jpg') center/cover no-repeat; /* Replace 'path/to/your/background-image.jpg' with the actual path to your background image */
+            background: url('techy.jpg') center/cover no-repeat;
             color: #fff;
             text-align: center;
-            padding: 2em 0;
+            padding: 3em 0;
+            position: relative;
         }
 
         header img {
@@ -26,8 +28,17 @@
             width: 150px;
             height: 150px;
             object-fit: cover;
-            margin-bottom: 10px;
             border: 5px solid #fff;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        h2, h3, h4 {
+            color: #4285f4;
         }
 
         section {
@@ -35,22 +46,19 @@
             margin: 2em auto;
             padding: 1.5em;
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1, h2, h3 {
-            color: #4285f4;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
 
         h2 {
             border-bottom: 2px solid #4285f4;
             padding-bottom: 0.5em;
-            margin-bottom: 1.5em;
+            margin-bottom: 1em;
         }
 
         p {
-            line-height: 1.6;
             color: #555;
+            margin-bottom: 1em;
         }
 
         ul {
@@ -58,12 +66,18 @@
             padding: 0;
         }
 
+        ul li {
+            position: relative;
+            padding-left: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
         ul li::before {
             content: '\2022';
             color: #4285f4;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
         }
 
         footer {
@@ -71,6 +85,25 @@
             padding: 1em 0;
             background-color: #4285f4;
             color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 600px) {
+            header {
+                padding: 2em 0;
+            }
+
+            header img {
+                width: 120px;
+                height: 120px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
@@ -80,59 +113,53 @@
     <header>
         <img src="Nelzone.jpg" alt="Nelson Oboh">
         <h1>Nelson Oboh</h1>
-        <p>I am Nelson Oboh</p>
+        <p>DevOps Engineer</p>
     </header>
 
     <section>
-        <h2>Get to know me</h2>
+        <h2>Get to Know Me</h2>
+        <p>I'm a seasoned DevOps Engineer with a proven track record of five years in architecting, implementing, and optimizing robust CI/CD and infrastructure automation solutions that meet business needs. I am eager to contribute my skills to a dynamic team and help achieve their goals.</p>
+    </section>
 
-        <p>I'm a well-seasoned and spicy DevOps Engineer with a proven track record of five years in architecting, implementing, and optimizing robust continuous integration, continuous delivery, and infrastructure automation solutions that meet business needs. Seeking opportunities to contribute my skills to a dynamic team and achieve their business goals.</p>
-        <!-- Add other key strengths and qualifications here -->
-
+    <section>
         <h2>Professional Experience</h2>
 
         <h3>Dell Technologies</h3>
         <p><strong>Role:</strong> DevOps Engineer | <strong>Duration:</strong> Sep 2020 - Current</p>
         <h4>Roles and Responsibilities:</h4>
         <ul>
-            <li>Supporting multiple AWS cloud instances running Ubuntu and RHEL Linux distribution.</li>
-            <li>Broke down Entrain monolithic app into two, hosting the React-based client-side app on S3 serving it with CloudFront and the server side on AWS ECS cluster.</li>
-            <li>Designed, implemented, and maintained monitoring and observability solutions using Datadog for a complex microservices architecture.</li>
-            <!-- Add other responsibilities and achievements -->
+            <li>Supported multiple AWS cloud instances running Ubuntu and RHEL Linux.</li>
+            <li>Decomposed a monolithic app into microservices, hosting the React-based client on S3 with CloudFront and the server on AWS ECS.</li>
+            <li>Designed and maintained monitoring solutions with Datadog for a complex microservices architecture.</li>
         </ul>
 
         <h3>Becton Dickinson</h3>
         <p><strong>Role:</strong> DevOps Engineer/Linux Administrator | <strong>Duration:</strong> May 2018 - Sep 2020</p>
         <h4>Roles and Responsibilities:</h4>
         <ul>
-            <li>Designed, built, and maintained CI/CD pipelines using Azure DevOps and AWS Code Pipeline.</li>
-            <li>Implemented serverless architecture using AWS Lambda to dynamically scale resources based on workload, resulting in a 30% reduction in operational costs.</li>
-            <li>Used Ansible playbooks to automate the environment's virtual and physical instance provisioning, configuration management, patching, and software deployment.</li>
+            <li>Built and maintained CI/CD pipelines using Azure DevOps and AWS Code Pipeline.</li>
+            <li>Implemented serverless architectures with AWS Lambda, achieving a 30% reduction in operational costs.</li>
+            <li>Automated provisioning and management with Ansible playbooks.</li>
         </ul>
-
     </section>
 
-</section>
+    <section>
+        <h2>Education</h2>
+        <p>Bachelor of Science in Computer Science, Ambrose Alli University, Edo State, Nigeria (Sep 2011)</p>
+        <p>Computer Networking and Troubleshooting, St. Angelos Institute for Technology and Management, Kalyan, Mumbai, India</p>
+    </section>
 
-<section>
-    <h2>Education</h2>
-    <p>Bachelor of Science Computer Science, Ambrose Alli University, Edo state, Nigeria (Sep 2011)</p>
-    <p>Computer Networking and Troubleshooting, St. Angelos institute for Technology and Management Kalyan Mumbai, India</p>
-</section>
+    <section>
+        <h2>Certifications</h2>
+        <p>AWS Certified Solutions Architect Associate</p>
+        <p>CompTIA Linux+</p>
+    </section>
 
-<section>
-    <h2>Certifications</h2>
-    <p>AWS Certified Solutions Architect Associate</p>
-    <p>CompTIA Linux +</p>
-</section>
+    <section>
+        <h2>Skills</h2>
+        <p>DevOps Tools: Jenkins, GitLab, CI/CD, Terraform, Ansible, Docker, Kubernetes</p>
+    </section>
 
-<section>
-    <h2>Skills</h2>
-    <p>DevOps Tools: Jenkins, GitLab, CI/CD, Terraform, Ansible, Docker, Kubernetes</p>
-    <!-- Add other skills here -->
-</section>
-
-<section>
     <footer>
         <p>&copy; 2024 Technel</p>
     </footer>
