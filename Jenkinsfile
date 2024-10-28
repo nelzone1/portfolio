@@ -1,12 +1,11 @@
-@Library ("shared-library") _
+@Library ("shared-library") _   
 pipeline {
     agent any
 
     stages {
-        stage('SCM Checkout') {
+        stage('scm Checkout') {
             steps {
-                echo 'Performing SCM Checkout'
-                scmCheckout()
+                scmCheckout ()
             }
         }
     }
