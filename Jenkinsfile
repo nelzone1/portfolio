@@ -1,12 +1,12 @@
 @Library ("shared-library") _   
 pipeline {
-    agent any
-
+    agent any 
     stages {
-        stage('scm Checkout') {
+        stage('Checkout') {
             steps {
-                scmCheckout ()
+                checkout scm
             }
         }
+        // Other stages here
     }
 }
